@@ -32,6 +32,8 @@ GEM
       activesupport (= 4.1.1)
       builder (~> 3.1)
       erubis (~> 2.7.0)
+    active_model_serializers (0.9.0)
+      activemodel (>= 3.2)
     activemodel (4.1.1)
       activesupport (= 4.1.1)
       builder (~> 3.1)
@@ -52,6 +54,10 @@ GEM
     ast (2.0.0)
     astrolabe (1.3.0)
       parser (>= 2.2.0.pre.3, < 3.0)
+    axiom-types (0.1.1)
+      descendants_tracker (~> 0.0.4)
+      ice_nine (~> 0.11.0)
+      thread_safe (~> 0.3, >= 0.3.1)
     bcrypt (3.1.9)
     better_errors (2.0.0)
       coderay (>= 1.0.0)
@@ -76,6 +82,8 @@ GEM
       launchy
     cliver (0.3.2)
     coderay (1.1.0)
+    coercible (1.0.0)
+      descendants_tracker (~> 0.0.1)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -86,6 +94,8 @@ GEM
     colored (1.2)
     database_cleaner (1.3.0)
     debug_inspector (0.0.2)
+    descendants_tracker (0.0.4)
+      thread_safe (~> 0.3, >= 0.3.1)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -94,6 +104,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
+    equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.2)
     factory_girl (4.5.0)
@@ -106,11 +117,36 @@ GEM
     formtastic (3.0.0)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.1.1)
+    grape (0.9.0)
+      activesupport
+      builder
+      hashie (>= 2.1.0)
+      multi_json (>= 1.3.2)
+      multi_xml (>= 0.5.2)
+      rack (>= 1.3.0)
+      rack-accept
+      rack-mount
+      virtus (>= 1.0.0)
+    grape-active_model_serializers (1.2.1)
+      active_model_serializers (>= 0.9.0.alpha1)
+      grape (~> 0.3)
+    grape-entity (0.4.4)
+      activesupport
+      multi_json (>= 1.3.2)
+    grape-swagger (0.7.2)
+      grape (>= 0.2.0)
+      grape-entity (>= 0.3.0)
+      kramdown (>= 1.3.1)
+    grape-swagger-rails (0.0.10)
+      grape-swagger (~> 0.7.2)
+      railties (>= 3.2.12)
     has_scope (0.6.0.rc)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
+    hashie (3.3.1)
     hike (1.2.3)
     i18n (0.6.11)
+    ice_nine (0.11.0)
     inherited_resources (1.5.1)
       actionpack (>= 3.2, < 4.2)
       has_scope (~> 0.6.0.rc)
@@ -125,6 +161,7 @@ GEM
     kaminari (0.16.1)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    kramdown (1.5.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     mail (2.5.4)
@@ -139,6 +176,7 @@ GEM
     mini_portile (0.6.1)
     minitest (5.4.3)
     multi_json (1.10.1)
+    multi_xml (0.5.5)
     nokogiri (1.6.4.1)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
@@ -172,8 +210,13 @@ GEM
     quiet_assets (1.0.3)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
+    rack-accept (0.4.5)
+      rack (>= 0.4)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
+    rack-cors (0.2.9)
+    rack-mount (0.8.3)
+      rack (>= 1.0.0)
     rack-test (0.6.2)
       rack (>= 1.0)
     rails (4.1.1)
@@ -258,6 +301,11 @@ GEM
     uglifier (2.5.3)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    virtus (1.0.3)
+      axiom-types (~> 0.1)
+      coercible (~> 1.0)
+      descendants_tracker (~> 0.0, >= 0.0.3)
+      equalizer (~> 0.0, >= 0.0.9)
     warden (1.2.3)
       rack (>= 1.0)
     websocket-driver (0.4.0)
@@ -268,6 +316,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  active_model_serializers
   activeadmin!
   better_errors
   capybara
@@ -276,6 +325,9 @@ DEPENDENCIES
   devise
   factory_girl_rails
   faker
+  grape
+  grape-active_model_serializers
+  grape-swagger-rails
   jquery-rails
   meta_request
   pg
@@ -285,6 +337,7 @@ DEPENDENCIES
   pry-stack_explorer
   pry-theme
   quiet_assets
+  rack-cors
   rails (= 4.1.1)
   rspec-rails
   rubocop
