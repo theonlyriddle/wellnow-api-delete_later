@@ -38,3 +38,28 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem "activeadmin", github: "gregbell/active_admin" # Until it's 1.0.0
+gem "devise"
+
+group :development do
+  gem "better_errors"
+  gem "meta_request"
+  gem "quiet_assets"
+end
+
+group :development, :test do
+  gem "capybara"
+  gem "capybara-screenshot"
+  gem "database_cleaner"
+  gem "factory_girl_rails"
+  gem "faker"
+  gem "poltergeist"
+  gem "pry-nav"
+  gem "pry-rails"
+  gem "pry-stack_explorer"
+  gem "pry-theme"
+  gem "rspec-rails"
+  gem "rubocop"
+  gem "shoulda-matchers"
+  gem "spring-commands-rspec"
+end
