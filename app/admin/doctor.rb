@@ -1,6 +1,7 @@
 ActiveAdmin.register Doctor do
+  filter :categories
 
-  permit_params :id, :firstname, :lastname, :address, :address2, :zipcode, :locality, :country_id, :email, :phone, :fax, :mobile, :created_at, :updated_at
+  permit_params :id, :firstname, :lastname, :address, :address2, :zipcode, :locality, :country_id, :email, :phone, :fax, :mobile, :categories, :created_at, :updated_at
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -30,6 +31,12 @@ ActiveAdmin.register Doctor do
       f.input :phone
       f.input :fax
       f.input :mobile
+    end
+
+    f.inputs "Categories" do
+        f.has_many :categories, :allow_destroy => false, :heading => false, :new_record => false do |cf|
+          cf.input :title
+        end
     end
     f.actions
   end
