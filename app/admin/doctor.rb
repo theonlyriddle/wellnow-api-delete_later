@@ -14,6 +14,7 @@ ActiveAdmin.register Doctor do
   #   permitted
   # end
 
+
   form do |f|
     f.inputs "Address" do
       f.input :firstname
@@ -22,7 +23,7 @@ ActiveAdmin.register Doctor do
       f.input :address2
       f.input :zipcode
       f.input :locality
-      f.input :country_id, :label => 'Country', :as => :select, :include_blank => false, :collection => Country.all.order('name')
+      f.input :country_id, :label => 'Country', :as => :select, :include_blank => true, :collection => Country.all.order('name')
     end
     f.inputs "Contact" do
       f.input :email
