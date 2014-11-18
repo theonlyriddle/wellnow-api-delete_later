@@ -1,5 +1,5 @@
 ActiveAdmin.register Country do
-  permit_params :id, :name, :iso, :created_at, :updated_at
+  permit_params :id, :name, :iso, :default, :created_at, :updated_at
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

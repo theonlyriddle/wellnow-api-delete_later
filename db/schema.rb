@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118192014) do
+ActiveRecord::Schema.define(version: 20141118200841) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -81,6 +81,7 @@ ActiveRecord::Schema.define(version: 20141118192014) do
     t.string   "iso"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "default",    default: false
   end
 
   create_table "doctors", force: true do |t|
