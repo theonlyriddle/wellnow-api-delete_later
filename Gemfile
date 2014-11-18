@@ -69,3 +69,20 @@ gem "grape"
 gem "grape-active_model_serializers"
 gem "grape-swagger-rails"
 gem "rack-cors", require: "rack/cors"
+
+# Model history
+gem 'paper_trail', '~> 3.0.3'
+
+#Heroku integration has previously relied on using the Rails plugin system, which has been removed from Rails 4. To enable features such as static asset serving and logging on Heroku please add
+gem 'rails_12factor', group: :production
+
+#i18n
+gem 'globalize', '~> 4.0.2'
+gem 'globalize-versioning'
+gem 'batch_translations'
+gem 'route_translator'
+gem "activeadmin-globalize", github: 'stefanoverna/activeadmin-globalize', branch: 'master'
+
+#Image upload
+gem "mini_magick"
+gem 'carrierwave'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141113163708) do
+ActiveRecord::Schema.define(version: 20141118192014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -49,6 +49,24 @@ ActiveRecord::Schema.define(version: 20141113163708) do
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
+  create_table "categories", force: true do |t|
+    t.integer  "rank",       default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "category_translations", force: true do |t|
+    t.integer  "category_id", null: false
+    t.string   "locale",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "title"
+    t.text     "description"
+  end
+
+  add_index "category_translations", ["category_id"], name: "index_category_translations_on_category_id", using: :btree
+  add_index "category_translations", ["locale"], name: "index_category_translations_on_locale", using: :btree
+
   create_table "contacts", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -57,5 +75,41 @@ ActiveRecord::Schema.define(version: 20141113163708) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "countries", force: true do |t|
+    t.string   "name"
+    t.string   "iso"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "doctors", force: true do |t|
+    t.string   "firstname"
+    t.string   "lastname"
+    t.string   "address"
+    t.string   "address2"
+    t.string   "zipcode"
+    t.string   "locality"
+    t.string   "email"
+    t.integer  "country_id"
+    t.string   "phone"
+    t.string   "fax"
+    t.string   "mobile"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "doctors", ["country_id"], name: "index_doctors_on_country_id", using: :btree
+
+  create_table "versions", force: true do |t|
+    t.string   "item_type",  null: false
+    t.integer  "item_id",    null: false
+    t.string   "event",      null: false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
 end
