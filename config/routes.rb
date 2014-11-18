@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
-  root to: "home#index"
+  root to: "welcome#index"
 
   mount API::Base, at: "/"
   mount GrapeSwaggerRails::Engine, at: "/documentation"

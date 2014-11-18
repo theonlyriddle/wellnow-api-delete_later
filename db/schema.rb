@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141118200841) do
+ActiveRecord::Schema.define(version: 20141118214730) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,11 @@ ActiveRecord::Schema.define(version: 20141118200841) do
     t.integer  "rank",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "categories_doctors", id: false, force: true do |t|
+    t.integer "doctor_id"
+    t.integer "category_id"
   end
 
   create_table "category_translations", force: true do |t|
