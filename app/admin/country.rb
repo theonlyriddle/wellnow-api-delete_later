@@ -1,4 +1,6 @@
 ActiveAdmin.register Country do
+  remove_filter :doctors
+
   permit_params :id, :name, :iso, :default, :created_at, :updated_at
 
   # See permitted parameters documentation:
