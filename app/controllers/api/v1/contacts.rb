@@ -4,6 +4,7 @@ module API
       include API::V1::Defaults
 
       resource :contacts do
+
         desc "Return all contacts"
         get "", root: :contacts do
           Contact.all

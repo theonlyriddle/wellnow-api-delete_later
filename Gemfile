@@ -69,6 +69,7 @@ gem "grape"
 gem "grape-active_model_serializers"
 gem "grape-swagger-rails"
 gem "rack-cors", require: "rack/cors"
+gem "hashie_rails"
 
 # Model history
 gem 'paper_trail', '~> 3.0.3'

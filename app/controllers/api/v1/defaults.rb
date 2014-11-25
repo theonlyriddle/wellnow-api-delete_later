@@ -18,6 +18,20 @@ module API
           def logger
             Rails.logger
           end
+
+          def set_locale
+            logger.debug "* Accept-Language: #{env['HTTP_ACCEPT_LANGUAGE']}"
+            I18n.locale = extract_locale_from_accept_language_header
+            logger.debug "* Locale set to '#{I18n.locale}'"
+          end
+
+          def extract_locale_from_accept_language_header
+            env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first || I18n.default_locale
+          end
+        end
+
+        before do
+          set_locale
         end
 
         rescue_from ActiveRecord::RecordNotFound do |e|
