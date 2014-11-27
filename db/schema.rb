@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141120203307) do
+ActiveRecord::Schema.define(version: 20141127191024) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,17 @@ ActiveRecord::Schema.define(version: 20141120203307) do
 
   add_index "admin_users", ["email"], name: "index_admin_users_on_email", unique: true, using: :btree
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "availability_generals", force: true do |t|
+    t.integer  "day"
+    t.time     "hour_from"
+    t.time     "hour_to"
+    t.integer  "doctor_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "availability_generals", ["doctor_id"], name: "index_availability_generals_on_doctor_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.integer  "rank",       default: 0
