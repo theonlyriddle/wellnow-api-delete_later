@@ -8,16 +8,31 @@ class Doctor < ActiveRecord::Base
   accepts_nested_attributes_for :categories
   accepts_nested_attributes_for :availability_generals
 
-  after_save :create_default_general_availability
+  geocoded_by :full_street_address
+
+  after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
+  after_create :create_default_general_availability
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :background, BackgroundUploader
 
-  #has_paper_trail
+  has_paper_trail
 
   def full_name
     firstname + " " + lastname
-  end 
+  end
+
+  def full_address
+    if !address2.empty?
+      address + ", " + address2
+    else
+      address
+    end
+  end
+
+  def full_street_address
+    full_address + ", " + zipcode + " " + locality +  ", " + country.name
+  end
 
   def avatar_url
     self.avatar.url

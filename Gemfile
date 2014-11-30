@@ -82,8 +82,12 @@ gem 'globalize', '~> 4.0.2'
 gem 'globalize-versioning'
 gem 'batch_translations'
 gem 'route_translator'
-gem "activeadmin-globalize", github: 'stefanoverna/activeadmin-globalize', branch: 'master'
+#gem "activeadmin-globalize", github: 'stefanoverna/activeadmin-globalize', branch: 'master'
+gem 'activeadmin-translate'
 
 #Image upload
 gem "mini_magick"
 gem 'carrierwave'
+
+#Geocoding
+gem "geocoder"

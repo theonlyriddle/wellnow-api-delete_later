@@ -1,22 +1,33 @@
 ActiveAdmin.register Category do
   # if you are using Rails 4 or Strong Parameters:
-  permit_params :id, :rank, :created_at, :updated_at, translations_attributes: [:id, :title, :description, :locale]
-
+  #permit_params :id, :rank, :created_at, :updated_at, translations_attributes: [:id, :title, :description, :locale]
+  permit_params :id, :rank, :created_at, :updated_at
   
-
+  filter :created_at
 
   index do
     # ...
-    translation_status
+    #translation_status
     # ...
-    default_actions
+    selectable_column
+    column :id
+    column :rank
+    column :created_at
+    column :updated_at
+    actions
   end
 
   form do |f|
     # ...
-    f.translated_inputs "Translated fields", switch_locale: false do |t|
-      t.input :title
-      t.input :description
+    # f.translated_inputs "Translated fields", switch_locale: false do |t|
+    #   t.input :title
+    #   t.input :description
+    # end
+    f.inputs "Translations" do
+        f.translate_inputs do |t|
+          t.input :title
+          t.input :description
+        end
     end
 
     f.inputs "Details" do

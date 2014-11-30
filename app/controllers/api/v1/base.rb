@@ -5,6 +5,7 @@ module API
     class Base < Grape::API
       mount API::V1::Contacts
       mount API::V1::Doctors
+      mount API::V1::Search
       # mount API::V1::AnotherResource
 
       add_swagger_documentation(

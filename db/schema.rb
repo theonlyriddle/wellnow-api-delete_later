@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141127191024) do
+ActiveRecord::Schema.define(version: 20141130121631) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -116,6 +116,8 @@ ActiveRecord::Schema.define(version: 20141127191024) do
     t.datetime "updated_at"
     t.string   "avatar"
     t.string   "background"
+    t.float    "latitude"
+    t.float    "longitude"
   end
 
   add_index "doctors", ["country_id"], name: "index_doctors_on_country_id", using: :btree
