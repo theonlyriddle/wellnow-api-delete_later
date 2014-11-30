@@ -6,13 +6,26 @@ module API
       resource :search do
         desc "Search for doctors"
         params do
-          requires :category, type: Integer
-          optional :latitude, type: Float
-          optional :longitude, type: Float
+          requires :cat, type: Integer
+          optional :lat, type: Float
+          optional :lon, type: Float
+          optional :addr, type: String
+          optional :radius, type: Float
         end
         get "", root: :doctors do
           { "declared_params" => declared(params) }
-          Doctor.joins(:doctors_categories).where("category_id = ?", params[:category])
+          
+          #Search by latitude and longitude or address
+          if !params[:lat].nil? && !params[:lon].nil?
+            lookup = [params[:lat], params[:lon]]
+          else
+            lookup = params[:addr]
+          end
+
+          #Radius
+          radius = params[:radius] || 5
+          
+          Doctor.joins(:doctors_categories).where("category_id = ?", params[:cat]).near(lookup, radius) 
         end
 
         desc "Return a doctor"
