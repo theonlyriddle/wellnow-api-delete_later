@@ -20,3 +20,4 @@
 
 # Ignore uploads
 /public/uploads
+.env
