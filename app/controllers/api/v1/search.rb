@@ -23,8 +23,8 @@ module API
           end
 
           #Radius
-          radius = params[:radius] || 5
-          
+          radius = params[:radius] || Settings.search.default_radius
+
           Doctor.joins(:doctors_categories).where("category_id = ?", params[:cat]).near(lookup, radius) 
         end
 
