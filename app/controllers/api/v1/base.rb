@@ -6,7 +6,9 @@ module API
       mount API::V1::Contacts
       mount API::V1::Doctors
       mount API::V1::Categories
+      mount API::V1::Languages
       mount API::V1::Search
+
       # mount API::V1::AnotherResource
 
       add_swagger_documentation(
