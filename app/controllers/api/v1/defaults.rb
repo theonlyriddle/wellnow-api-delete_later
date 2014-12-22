@@ -27,7 +27,12 @@ module API
           end
 
           def extract_locale_from_accept_language_header
-            env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first || I18n.default_locale
+            logger.debug "* Frontend language '#{headers['Frontend-Language']}'"
+            if (!headers['Frontend-Language'].nil?)
+               headers['Frontend-Language']
+            else
+              env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first || I18n.default_locale
+            end
           end
         end
 

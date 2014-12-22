@@ -16,6 +16,15 @@ GIT
       ransack (~> 1.3)
       sass-rails
 
+GIT
+  remote: git://github.com/rbatllet/activeadmin-translate.git
+  revision: 0fd19eab5a1e43a322cdb34df05501a05e610b70
+  specs:
+    activeadmin-translate (0.2.3)
+      activeadmin
+      globalize
+      railties
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -34,10 +43,6 @@ GEM
       erubis (~> 2.7.0)
     active_model_serializers (0.9.0)
       activemodel (>= 3.2)
-    activeadmin-translate (0.2.2)
-      activeadmin
-      globalize3
-      railties
     activemodel (4.1.1)
       activesupport (= 4.1.1)
       builder (~> 3.1)
@@ -134,9 +139,6 @@ GEM
     globalize-versioning (0.1.0.alpha.1)
       globalize (>= 3, < 5)
       paper_trail (~> 3.0.0)
-    globalize3 (0.1.0)
-      activemodel (>= 3.0.0)
-      activerecord (>= 3.0.0)
     grape (0.9.0)
       activesupport
       builder
@@ -359,7 +361,7 @@ PLATFORMS
 DEPENDENCIES
   active_model_serializers
   activeadmin!
-  activeadmin-translate
+  activeadmin-translate!
   batch_translations
   better_errors
   capybara

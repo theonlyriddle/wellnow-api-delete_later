@@ -11,9 +11,13 @@ module API
           optional :lon, type: Float
           optional :addr, type: String
           optional :radius, type: Float
+          optional :nb_days, type: Integer
         end
-        get "", root: :doctors do
+        get "", root: :search do
           { "declared_params" => declared(params) }
+
+          #Nb of days you want to search
+          nb_days = params[:nb_days] || Settings.search.default_nb_days
           
           #Search by latitude and longitude or address
           if !params[:lat].nil? && !params[:lon].nil?
@@ -25,7 +29,28 @@ module API
           #Radius
           radius = params[:radius] || Settings.search.default_radius
 
-          Doctor.joins(:doctors_categories).where("category_id = ?", params[:cat]).near(lookup, radius) 
+          #Search all doctors in the selected area
+          selected_doctors = []
+
+          #Check if they are available
+          from_date = Date.today
+          to_date = Date.today + nb_days.days
+          (from_date..to_date).each { |d|  
+            for hour in 0..23
+              [0, 15, 30, 45].each { |minutes|
+                checked_time = Time.new(d.year, d.month, d.day, hour, minutes, 0)
+                if (checked_time >= Time.now)
+                  #selected_doctors.push Doctor.joins(:doctors_categories).where("category_id = ?", params[:cat]).near(lookup, radius).available_at(checked_time.wday, 0)
+                  #puts checked_time.strftime("%Y-%m-%d %H:%M")
+                end
+              }
+            end
+          }
+
+          #selected_doctors
+          #Search all doctors in the selected area
+          Doctor.joins(:doctors_categories).where("category_id = ?", params[:cat]).near(lookup, radius)
+
         end
 
         desc "Return a doctor"

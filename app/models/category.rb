@@ -3,6 +3,8 @@ class Category < ActiveRecord::Base
     has_and_belongs_to_many :doctors, through: :doctors_categories
 
     has_many :category_translations
+    
+    accepts_nested_attributes_for :translations
 
     #active_admin_translates :title, :description do
     #    validates_presence_of :title

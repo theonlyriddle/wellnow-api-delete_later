@@ -1,7 +1,7 @@
 ActiveAdmin.register Category do
   # if you are using Rails 4 or Strong Parameters:
-  #permit_params :id, :rank, :created_at, :updated_at, translations_attributes: [:id, :title, :description, :locale]
-  permit_params :id, :rank, :created_at, :updated_at
+  permit_params :id, :rank, :created_at, :updated_at, translations_attributes: [:id, :title, :description, :locale]
+  #permit_params :id, :rank, :created_at, :updated_at, :translations, :translations_attributes
   
   filter :created_at
 
@@ -35,6 +35,20 @@ ActiveAdmin.register Category do
     end
 
     f.actions
+  end
+
+  show do
+    attributes_table do
+      row :id
+      row :rank
+      row :title
+      # panel 'Globalized Model' do
+      #   translate_attributes_table_for category_translations do
+      #     row :title
+      #     row :description
+      #   end
+      # end
+    end 
   end
 
 

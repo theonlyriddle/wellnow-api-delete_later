@@ -1,6 +1,7 @@
 class Doctor < ActiveRecord::Base
   belongs_to :country
   has_and_belongs_to_many :categories
+  has_many :availabilities, :dependent => :delete_all
   has_many :availability_generals, :dependent => :delete_all
 
   validates :firstname, :lastname, :address, :zipcode, :locality, :country_id, :email, :phone, presence: true
@@ -17,6 +18,10 @@ class Doctor < ActiveRecord::Base
   mount_uploader :background, BackgroundUploader
 
   has_paper_trail
+
+  scope :available_at, ->(day, time) { 
+    joins(:availability_generals).where("day = ?", day) 
+  }
 
   def full_name
     firstname + " " + lastname
