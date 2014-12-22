@@ -2,6 +2,7 @@ class Doctor < ActiveRecord::Base
   belongs_to :country
   has_and_belongs_to_many :categories
   has_many :availabilities, :dependent => :delete_all
+  has_many :slots, :through => :availabilities
   has_many :availability_generals, :dependent => :delete_all
 
   validates :firstname, :lastname, :address, :zipcode, :locality, :country_id, :email, :phone, presence: true

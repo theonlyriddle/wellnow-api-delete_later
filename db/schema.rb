@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222080829) do
+ActiveRecord::Schema.define(version: 20141222121530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,15 +50,16 @@ ActiveRecord::Schema.define(version: 20141222080829) do
   add_index "admin_users", ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "availabilities", force: true do |t|
-    t.datetime "slot_start"
     t.integer  "doctor_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "availability_general_id"
+    t.integer  "slot_id"
   end
 
   add_index "availabilities", ["availability_general_id"], name: "index_availabilities_on_availability_general_id", using: :btree
   add_index "availabilities", ["doctor_id"], name: "index_availabilities_on_doctor_id", using: :btree
+  add_index "availabilities", ["slot_id"], name: "index_availabilities_on_slot_id", using: :btree
 
   create_table "availability_generals", force: true do |t|
     t.integer  "day"
@@ -138,6 +139,12 @@ ActiveRecord::Schema.define(version: 20141222080829) do
     t.string   "name"
     t.string   "iso"
     t.integer  "rank"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "slots", force: true do |t|
+    t.datetime "start"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

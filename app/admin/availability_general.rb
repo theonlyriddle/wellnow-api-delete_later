@@ -1,6 +1,11 @@
 ActiveAdmin.register AvailabilityGeneral do
   permit_params :id, :doctor_id, :day, :hour_from, :hour_to, :created_at, :updated_at
 
+  filter :doctor
+  filter :day, :as => :select, :collection => proc { {"Monday" => 1, "Tuesday" => 2, "Wednesday" => 3, "Thursday" => 4, "Friday" => 5, "Saturday" => 6, "Sunday" => 0} }
+  filter :created_at, :as => :date_range
+  filter :updated_at, :as => :date_range
+
 
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters

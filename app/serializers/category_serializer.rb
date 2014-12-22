@@ -1,3 +1,6 @@
 class CategorySerializer < ActiveModel::Serializer
-  attributes :id, :title, :description, :rank, :created_at, :updated_at
+    #cached
+    #delegate :cache_key, to: :object
+
+    attributes :id, :title, :description, :rank, :created_at, :updated_at
 end

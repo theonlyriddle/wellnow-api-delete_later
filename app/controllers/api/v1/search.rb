@@ -30,26 +30,15 @@ module API
           radius = params[:radius] || Settings.search.default_radius
 
           #Search all doctors in the selected area
-          selected_doctors = []
+          doctors = Doctor.joins(:categories).where("category_id = ?", params[:cat]).near(lookup, radius)
 
-          #Check if they are available
-          from_date = Date.today
-          to_date = Date.today + nb_days.days
-          (from_date..to_date).each { |d|  
-            for hour in 0..23
-              [0, 15, 30, 45].each { |minutes|
-                checked_time = Time.new(d.year, d.month, d.day, hour, minutes, 0)
-                if (checked_time >= Time.now)
-                  #selected_doctors.push Doctor.joins(:doctors_categories).where("category_id = ?", params[:cat]).near(lookup, radius).available_at(checked_time.wday, 0)
-                  #puts checked_time.strftime("%Y-%m-%d %H:%M")
-                end
-              }
-            end
-          }
+          slots = Slot.includes(:doctors).joins(:doctors).where("start > now() AND start <= (?)", Date.today + nb_days.days).order(:start).merge(doctors)
+          
+          
+          #Availability.select('firstname, lastname').joins(doctor: :categories).where("category_id = ?", params[:cat]).near(lookup, radius).order(:slot_start)
+          #availabilities = Availability.joins(:doctor).where("doctor_id IN (?) AND slot_start > now() AND slot_start <= (?)", doctor_ids, Date.today + nb_days.days).order(:slot_start)
 
-          #selected_doctors
-          #Search all doctors in the selected area
-          Doctor.joins(:doctors_categories).where("category_id = ?", params[:cat]).near(lookup, radius)
+          #availabilities.push Availability.last
 
         end
 

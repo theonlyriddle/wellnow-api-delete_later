@@ -34,33 +34,44 @@ class AvailabilityGeneral < ActiveRecord::Base
 
     #Create availability after setting general availability
     def init_availability_based_on_general_availability
-        inserts = []
+        #inserts = []
         #Check if they are available
-        from_date = Date.today
-        to_date = Date.today + 10.days
-        (from_date..to_date).each { |d|  
-            #Check if it's the same day
-            if (d.wday == day)
-                #Loop around the hours
-                for hour in hour_from.hour..hour_to.hour
-                  [0, 15, 30, 45].each { |minutes|
-                    checked_time = Time.new(d.year, d.month, d.day, hour, minutes, 0)
-                    if ((hour < hour_to.hour || (hour == hour_to.hour && minutes < hour_to.min)) && checked_time >= Time.now)
-                        # Later must check if there's an event here
+        #from_date = Date.today
+        #to_date = Date.today + 10.days
+        # (from_date..to_date).each { |d|  
+        #     #Check if it's the same day
+        #     if (d.wday == day)
+        #         #Loop around the hours
+        #         for hour in hour_from.hour..hour_to.hour
+        #           [0, 15, 30, 45].each { |minutes|
+        #             checked_time = Time.new(d.year, d.month, d.day, hour, minutes, 0)
+        #             if ((hour < hour_to.hour || (hour == hour_to.hour && minutes < hour_to.min)) && checked_time >= Time.now)
 
-                        # Add that the doctor is available if the time is between general availability dates
+        #                 # Later must check if there's an event here
+
+        #                 # Add that the doctor is available if the time is between general availability dates
                         
-                        inserts.push "('#{checked_time}', #{doctor_id}, #{id}, now())"
+        #                 #inserts.push "('#{checked_time}', #{doctor_id}, #{id}, #{doctor.latitude}, #{doctor.longitude}, now())"
 
+        #               #selected_doctors.push Doctor.joins(:doctors_categories).where("category_id = ?", params[:cat]).near(lookup, radius).available_at(checked_time.wday, 0)
+        #               #puts checked_time.strftime("%Y-%m-%d %H:%M")
+        #             end
+        #           }
+        #         end
+        #     end
+        #   }
+         # sql = "INSERT INTO availabilities (\"slot_start\", \"doctor_id\", \"availability_general_id\", \"latitude\", \"longitude\", \"created_at\") VALUES #{inserts.join(", ")}"
+          #ActiveRecord::Base.connection.execute sql
 
-                      #selected_doctors.push Doctor.joins(:doctors_categories).where("category_id = ?", params[:cat]).near(lookup, radius).available_at(checked_time.wday, 0)
-                      #puts checked_time.strftime("%Y-%m-%d %H:%M")
-                    end
-                  }
-                end
-            end
-          }
-          sql = "INSERT INTO availabilities (\"slot_start\", \"doctor_id\", \"availability_general_id\", \"created_at\") VALUES #{inserts.join(", ")}"
-          ActiveRecord::Base.connection.execute sql
+        # Selects all the possible slots
+        selected_slots = Slot.where("EXTRACT(dow FROM start) IN (#{day}) AND ((EXTRACT(hour FROM start) = #{hour_from.hour} AND EXTRACT(minute FROM start) >= #{hour_from.min}) OR (EXTRACT(hour FROM start) > #{hour_from.hour} AND EXTRACT(hour FROM start) < #{hour_to.hour}) OR (EXTRACT(hour FROM start) = #{hour_to.hour} AND EXTRACT(minute FROM start) < #{hour_to.min}))")
+
+        inserts = []
+        selected_slots.each do |s|
+            inserts.push "(#{doctor_id}, #{s.id}, #{id}, now(), now())"
+        end     
+
+        sql = "INSERT INTO availabilities (\"doctor_id\", \"slot_id\", \"availability_general_id\", \"created_at\", \"updated_at\") VALUES #{inserts.join(", ")}"
+        ActiveRecord::Base.connection.execute sql
     end
 end
