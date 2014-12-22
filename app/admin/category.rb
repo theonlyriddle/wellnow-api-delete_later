@@ -12,6 +12,7 @@ ActiveAdmin.register Category do
     selectable_column
     column :id
     column :rank
+    column :title
     column :created_at
     column :updated_at
     actions
