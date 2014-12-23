@@ -68,6 +68,7 @@ class Doctor < ActiveRecord::Base
 
     def create_default_general_availability
       Time.zone = time_zone
+      # Set up 8:00 - 12:00 and 13:00 - 18:00 on weekdays by default
       morning_start = Time.zone.parse("2012-03-02 08:00:00")
       morning_end = Time.zone.parse("2012-03-02 12:00:00")
       afternoon_start = Time.zone.parse("2012-03-02 13:00:00")

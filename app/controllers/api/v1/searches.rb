@@ -1,6 +1,6 @@
 module API
   module V1
-    class Search < Grape::API
+    class Searches < Grape::API
       include API::V1::Defaults
 
       resource :search do
@@ -15,7 +15,7 @@ module API
         end
         
         #get "", root: :search, serializer: SearchSerializer do
-        get "", root: :search do
+        get "", root: :search, serializer: SearchSerializer do
           { "declared_params" => declared(params) }
 
           #Nb of days you want to search
@@ -31,16 +31,15 @@ module API
           #Radius
           radius = params[:radius] || Settings.search.default_radius
 
-          #search = Search.new
-          #search.lat = params[:lat]
-
-          #search
+          search = Search.new(:category_id => params['cat'], :lat => params['lat'], :lon => params['lon'], :radius => radius)
 
           #Search all doctors in the selected area
-          doctors = Doctor.joins(:categories).where("category_id = ?", params[:cat]).near(lookup, radius)
+          search.doctors = Doctor.joins(:categories).where("category_id = ?", params[:cat]).near(lookup, radius)
+          search.slots = Slot.includes(:doctors).joins(:doctors).where("start > now() AND start <= (?)", Date.today + nb_days.days).order(:start).merge(search.doctors)
+          search
 
           #Group the available doctors per time slot
-          slots = Slot.includes(:doctors).joins(:doctors).where("start > now() AND start <= (?)", Date.today + nb_days.days).order(:start).merge(doctors)
+          #
           
           #Time.zone
           
