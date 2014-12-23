@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141222121530) do
+ActiveRecord::Schema.define(version: 20141223112603) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -109,7 +109,8 @@ ActiveRecord::Schema.define(version: 20141222121530) do
     t.string   "iso"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "default",    default: false
+    t.boolean  "default",           default: false
+    t.string   "default_time_zone"
   end
 
   create_table "doctors", force: true do |t|
@@ -130,6 +131,7 @@ ActiveRecord::Schema.define(version: 20141222121530) do
     t.string   "background"
     t.float    "latitude"
     t.float    "longitude"
+    t.string   "time_zone"
   end
 
   add_index "doctors", ["country_id"], name: "index_doctors_on_country_id", using: :btree
@@ -142,6 +144,16 @@ ActiveRecord::Schema.define(version: 20141222121530) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "searches", force: true do |t|
+    t.integer  "category_id"
+    t.float    "lon"
+    t.float    "lat"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "searches", ["category_id"], name: "index_searches_on_category_id", using: :btree
 
   create_table "slots", force: true do |t|
     t.datetime "start"

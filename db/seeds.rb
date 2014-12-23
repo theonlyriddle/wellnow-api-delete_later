@@ -7,26 +7,26 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-# sql = "TRUNCATE TABLE slots"
-# ActiveRecord::Base.connection.execute sql
+sql = "TRUNCATE TABLE slots"
+ActiveRecord::Base.connection.execute sql
 
-# #Creates slots for a year
-# inserts = []
-# #Check if they are available
-# from_date = Date.today
-# to_date = Date.today + 10.years
-# (from_date..to_date).each { |d|  
-#     #Loop around the hours
-#     for hour in 0..23
-#       [0, 15, 30, 45].each { |minutes|
-#         checked_time = Time.new(d.year, d.month, d.day, hour, minutes, 0)
-#         if (checked_time >= Time.now)
-#             inserts.push "('#{checked_time}', now())"
-#         end
-#       }
-#     end
-# }
-# sql = "INSERT INTO slots (\"start\", \"created_at\") VALUES #{inserts.join(", ")}"
-# ActiveRecord::Base.connection.execute sql
+#Creates slots for a year
+inserts = []
+#Check if they are available
+from_date = Date.today
+to_date = Date.today + 10.years
+(from_date..to_date).each { |d|  
+    #Loop around the hours
+    for hour in 0..23
+      [0, 15, 30, 45].each { |minutes|
+        checked_time = Time.new(d.year, d.month, d.day, hour, minutes, 0)
+        if (checked_time >= Time.now)
+            inserts.push "('#{checked_time}', now())"
+        end
+      }
+    end
+}
+sql = "INSERT INTO slots (\"start\", \"created_at\") VALUES #{inserts.join(", ")}"
+ActiveRecord::Base.connection.execute sql
 
 

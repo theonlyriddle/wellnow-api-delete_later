@@ -1,7 +1,7 @@
 ActiveAdmin.register Doctor do
   filter :categories
 
-  permit_params :id, :firstname, :lastname, :address, :address2, :zipcode, :locality, :country_id, :email, :phone, :fax, :mobile, :categories, :avatar, :avatar_cache, :background, :background_cache, :created_at, :updated_at, category_ids: []
+  permit_params :id, :firstname, :lastname, :address, :address2, :zipcode, :locality, :country_id, :time_zone, :email, :phone, :fax, :mobile, :categories, :avatar, :avatar_cache, :background, :background_cache, :created_at, :updated_at, category_ids: []
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -42,6 +42,7 @@ ActiveAdmin.register Doctor do
       f.input :zipcode
       f.input :locality
       f.input :country_id, :label => 'Country', :as => :select, :include_blank => true, :collection => Country.all.order('name')
+      f.input :time_zone, :as => :time_zone
     end
     f.inputs "Contact" do
       f.input :email

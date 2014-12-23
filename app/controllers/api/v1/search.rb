@@ -13,6 +13,8 @@ module API
           optional :radius, type: Float
           optional :nb_days, type: Integer
         end
+        
+        #get "", root: :search, serializer: SearchSerializer do
         get "", root: :search do
           { "declared_params" => declared(params) }
 
@@ -29,11 +31,18 @@ module API
           #Radius
           radius = params[:radius] || Settings.search.default_radius
 
+          #search = Search.new
+          #search.lat = params[:lat]
+
+          #search
+
           #Search all doctors in the selected area
           doctors = Doctor.joins(:categories).where("category_id = ?", params[:cat]).near(lookup, radius)
 
+          #Group the available doctors per time slot
           slots = Slot.includes(:doctors).joins(:doctors).where("start > now() AND start <= (?)", Date.today + nb_days.days).order(:start).merge(doctors)
           
+          #Time.zone
           
           #Availability.select('firstname, lastname').joins(doctor: :categories).where("category_id = ?", params[:cat]).near(lookup, radius).order(:slot_start)
           #availabilities = Availability.joins(:doctor).where("doctor_id IN (?) AND slot_start > now() AND slot_start <= (?)", doctor_ids, Date.today + nb_days.days).order(:slot_start)

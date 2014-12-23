@@ -67,15 +67,21 @@ class Doctor < ActiveRecord::Base
   private
 
     def create_default_general_availability
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 1, 'hour_from' => "08:00", 'hour_to' => "12:00")
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 1, 'hour_from' => "13:00", 'hour_to' => "18:00")
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 2, 'hour_from' => "08:00", 'hour_to' => "12:00")
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 2, 'hour_from' => "13:00", 'hour_to' => "18:00")
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 3, 'hour_from' => "08:00", 'hour_to' => "12:00")
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 3, 'hour_from' => "13:00", 'hour_to' => "18:00")
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 4, 'hour_from' => "08:00", 'hour_to' => "12:00")
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 4, 'hour_from' => "13:00", 'hour_to' => "18:00")
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 5, 'hour_from' => "08:00", 'hour_to' => "12:00")
-      AvailabilityGeneral.create('doctor_id' => id, 'day' => 5, 'hour_from' => "13:00", 'hour_to' => "18:00")
+      Time.zone = time_zone
+      morning_start = Time.zone.parse("2012-03-02 08:00:00")
+      morning_end = Time.zone.parse("2012-03-02 12:00:00")
+      afternoon_start = Time.zone.parse("2012-03-02 13:00:00")
+      afternoon_end = Time.zone.parse("2012-03-02 18:00:00")
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 1, 'hour_from' => morning_start, 'hour_to' => morning_end)
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 1, 'hour_from' => afternoon_start, 'hour_to' => afternoon_end)
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 2, 'hour_from' => morning_start, 'hour_to' => morning_end)
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 2, 'hour_from' => afternoon_start, 'hour_to' => afternoon_end)
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 3, 'hour_from' => morning_start, 'hour_to' => morning_end)
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 3, 'hour_from' => afternoon_start, 'hour_to' => afternoon_end)
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 4, 'hour_from' => morning_start, 'hour_to' => morning_end)
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 4, 'hour_from' => afternoon_start, 'hour_to' => afternoon_end)
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 5, 'hour_from' => morning_start, 'hour_to' => morning_end)
+      AvailabilityGeneral.create('doctor_id' => id, 'day' => 5, 'hour_from' => afternoon_start, 'hour_to' => afternoon_end)
+      Time.zone = 'UTC'
     end
 end

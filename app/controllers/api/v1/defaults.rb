@@ -24,6 +24,8 @@ module API
             logger.debug "* Accept-Language: #{env['HTTP_ACCEPT_LANGUAGE']}"
             I18n.locale = extract_locale_from_accept_language_header
             logger.debug "* Locale set to '#{I18n.locale}'"
+            Time.zone = 'UTC'
+            Time.current.utc.iso8601
           end
 
           def extract_locale_from_accept_language_header
