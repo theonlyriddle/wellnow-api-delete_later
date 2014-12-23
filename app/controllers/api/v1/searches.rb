@@ -38,7 +38,7 @@ module API
 
           #Search all doctors in the selected area
           search.doctors = Doctor.joins(:categories).where("category_id = ?", search_params[:cat]).near(lookup, radius)
-          search.slots = Slot.includes(:doctors).joins(:doctors).where("start > now() AND start <= (?)", Date.today + nb_days.days).order(:start).merge(search.doctors)
+          search.slots = Slot.includes(:doctors).joins(:doctors).where("start > (?) AND start <= (?)", Time.zone.now + 1.hours, Date.today + nb_days.days).order(:start).merge(search.doctors)
           search
 
         end
@@ -74,7 +74,7 @@ module API
 
           #Search all doctors in the selected area
           search.doctors = Doctor.joins(:categories).where("category_id = ?", search_params[:cat]).near(lookup, radius)
-          search.slots = Slot.includes(:doctors).joins(:doctors).where("start > now() AND start <= (?)", Date.today + nb_days.days).order(:start).merge(search.doctors)
+          search.slots = Slot.includes(:doctors).joins(:doctors).where("start > (?) AND start <= (?)", Time.zone.now + 1.hours, Date.today + nb_days.days).order(:start).merge(search.doctors)
           search
 
         end

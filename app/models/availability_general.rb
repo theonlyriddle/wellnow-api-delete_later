@@ -58,6 +58,8 @@ class AvailabilityGeneral < ActiveRecord::Base
 
     def remove_all_availability_based_on_general_availability
         #availabilities.destroy()
-        Availability.destroy_all(:availability_general_id => id)
+        #Availability.destroy_all(:availability_general_id => id)
+        sql = "DELETE FROM availabilities WHERE availability_general_id = #{id}"
+        ActiveRecord::Base.connection.execute sql
     end
 end
