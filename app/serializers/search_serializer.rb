@@ -1,5 +1,5 @@
 class SearchSerializer < ActiveModel::Serializer
     
-    attributes :category_id, :lat, :lon, :radius, :doctors
+    attributes :id, :category, :lat, :lon, :radius, :doctors, :first_doctor, :first_doctor_first_availability, :first_doctor_first_slot
     has_many :slots
 end

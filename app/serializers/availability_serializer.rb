@@ -1,7 +1,8 @@
-class SlotSerializer < ActiveModel::Serializer
-  attributes :id, :start
-  has_many :doctors
-  has_many :availabilities
+class AvailabilitySerializer < ActiveModel::Serializer
+  attributes :id, :doctor_id, :created_at, :updated_at, :slot_id, :doctor, :slot
+  #belongs_to :doctor
+  #has_many :doctors
+  #has_many :categories
   #has_many :availability_generals
 
   #def serializable_hash
