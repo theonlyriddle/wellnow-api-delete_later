@@ -80,7 +80,7 @@ gem 'paper_trail', '~> 3.0.3'
 gem 'rails_12factor', group: :production
 
 #i18n
-gem 'globalize', '~> 4.0.2'
+gem 'globalize', :git => 'https://github.com/globalize/globalize.git', :branch => 'rails-4-2-upgrade'
 gem 'globalize-versioning'
 gem 'batch_translations'
 gem 'route_translator'

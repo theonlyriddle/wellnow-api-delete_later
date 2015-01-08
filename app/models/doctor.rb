@@ -4,7 +4,7 @@ class Doctor < ActiveRecord::Base
   has_many :availabilities, :dependent => :delete_all
   has_many :slots, :through => :availabilities
   has_many :availability_generals, :dependent => :delete_all
-  has_many :capacities
+  has_many :capacities, :dependent => :delete_all
   has_many :procedures, through: :capacities
 
   validates :firstname, :lastname, :address, :zipcode, :locality, :country_id, :email, :phone, presence: true
@@ -15,7 +15,7 @@ class Doctor < ActiveRecord::Base
   geocoded_by :full_street_address
 
   after_validation :geocode, if: ->(obj){ obj.address.present? and obj.address_changed? }
-  after_create :create_default_general_availability
+  after_create :add_default_capacities, :create_default_general_availability
 
   mount_uploader :avatar, AvatarUploader
   mount_uploader :background, BackgroundUploader
@@ -86,5 +86,11 @@ class Doctor < ActiveRecord::Base
       AvailabilityGeneral.create('doctor_id' => id, 'day' => 5, 'hour_from' => morning_start, 'hour_to' => morning_end)
       AvailabilityGeneral.create('doctor_id' => id, 'day' => 5, 'hour_from' => afternoon_start, 'hour_to' => afternoon_end)
       Time.zone = 'UTC'
+    end
+
+    def add_default_capacities
+      categories.each do |cat|
+        self.procedures << Procedure.where("category_id" => cat.id)
+      end
     end
 end

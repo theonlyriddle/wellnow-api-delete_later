@@ -1,6 +1,6 @@
 ActiveAdmin.register Category do
   # if you are using Rails 4 or Strong Parameters:
-  permit_params :id, :rank, :created_at, :updated_at, translations_attributes: [:id, :title, :description, :locale]
+  permit_params :id, :rank, :category_id, :created_at, :updated_at, translations_attributes: [:id, :title, :description, :locale]
   #permit_params :id, :rank, :created_at, :updated_at, :translations, :translations_attributes
   
   filter :created_at

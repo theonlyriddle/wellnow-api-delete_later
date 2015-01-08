@@ -36,6 +36,15 @@ GIT
       globalize
       railties
 
+GIT
+  remote: https://github.com/globalize/globalize.git
+  revision: 649df7d11b2781162cdaa1a4f0282deeeb13584e
+  branch: rails-4-2-upgrade
+  specs:
+    globalize (4.0.2)
+      activemodel (>= 4.2.0, < 4.3)
+      activerecord (>= 4.2.0, < 4.3)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -155,9 +164,6 @@ GEM
     geocoder (1.2.6)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
-    globalize (4.0.3)
-      activemodel (>= 4.0.0, < 5)
-      activerecord (>= 4.0.0, < 5)
     globalize-versioning (0.1.0.alpha.1)
       globalize (>= 3, < 5)
       paper_trail (~> 3.0.0)
@@ -405,7 +411,7 @@ DEPENDENCIES
   factory_girl_rails
   faker
   geocoder
-  globalize (~> 4.0.2)
+  globalize!
   globalize-versioning
   grape
   grape-active_model_serializers

@@ -1,7 +1,7 @@
 ActiveAdmin.register Doctor do
   filter :categories
 
-  permit_params :id, :firstname, :lastname, :address, :address2, :zipcode, :locality, :country_id, :time_zone, :email, :phone, :fax, :mobile, :categories, :avatar, :avatar_cache, :background, :background_cache, :created_at, :updated_at, category_ids: []
+  permit_params :id, :firstname, :lastname, :address, :address2, :zipcode, :locality, :country_id, :time_zone, :email, :phone, :fax, :mobile, :categories, :avatar, :avatar_cache, :background, :background_cache, :created_at, :updated_at, category_ids: [], capacities: []
   # See permitted parameters documentation:
   # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
   #
@@ -61,6 +61,7 @@ ActiveAdmin.register Doctor do
     f.inputs "Categories" do
       f.input :categories, :as => :select, :input_html => {:multiple => true}
     end
+
     f.actions
   end
 
