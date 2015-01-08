@@ -36,4 +36,9 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  #Upgrade to Rails 4.2, preparation to Rails 5.0 // Ordering of test cases
+  Rails.application.configure do
+    config.active_support.test_order = :sorted # or `:random` if you prefer
+  end
 end
