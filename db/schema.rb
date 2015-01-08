@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150102170707) do
+ActiveRecord::Schema.define(version: 20150108171305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,17 @@ ActiveRecord::Schema.define(version: 20150102170707) do
   end
 
   add_index "availability_generals", ["doctor_id"], name: "index_availability_generals_on_doctor_id", using: :btree
+
+  create_table "capacities", force: true do |t|
+    t.integer  "doctor_id"
+    t.integer  "procedure_id"
+    t.integer  "length"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "capacities", ["doctor_id"], name: "index_capacities_on_doctor_id", using: :btree
+  add_index "capacities", ["procedure_id"], name: "index_capacities_on_procedure_id", using: :btree
 
   create_table "categories", force: true do |t|
     t.integer  "rank",       default: 0
@@ -146,6 +157,26 @@ ActiveRecord::Schema.define(version: 20150102170707) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "procedure_translations", force: true do |t|
+    t.integer  "procedure_id", null: false
+    t.string   "locale",       null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "name"
+  end
+
+  add_index "procedure_translations", ["locale"], name: "index_procedure_translations_on_locale", using: :btree
+  add_index "procedure_translations", ["procedure_id"], name: "index_procedure_translations_on_procedure_id", using: :btree
+
+  create_table "procedures", force: true do |t|
+    t.integer  "default_length", default: 15
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "procedures", ["category_id"], name: "index_procedures_on_category_id", using: :btree
 
   create_table "searches", force: true do |t|
     t.integer  "category_id"

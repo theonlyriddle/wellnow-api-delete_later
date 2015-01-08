@@ -4,6 +4,8 @@ class Doctor < ActiveRecord::Base
   has_many :availabilities, :dependent => :delete_all
   has_many :slots, :through => :availabilities
   has_many :availability_generals, :dependent => :delete_all
+  has_many :capacities
+  has_many :procedures, through: :capacities
 
   validates :firstname, :lastname, :address, :zipcode, :locality, :country_id, :email, :phone, presence: true
 
