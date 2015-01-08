@@ -17,6 +17,17 @@ GIT
       sass-rails
 
 GIT
+  remote: git://github.com/josevalim/inherited_resources.git
+  revision: ff1c991307ff78cce98882b6986aeabbbcfd70c4
+  branch: rails-4-2
+  specs:
+    inherited_resources (1.5.1)
+      actionpack (>= 3.2, < 5)
+      has_scope (~> 0.6.0.rc)
+      railties (>= 3.2, < 5)
+      responders
+
+GIT
   remote: git://github.com/rbatllet/activeadmin-translate.git
   revision: 0fd19eab5a1e43a322cdb34df05501a05e610b70
   specs:
@@ -183,9 +194,6 @@ GEM
     hike (1.2.3)
     i18n (0.7.0)
     ice_nine (0.11.1)
-    inherited_resources (1.4.1)
-      has_scope (~> 0.6.0.rc)
-      responders (~> 1.0.0.rc)
     jquery-rails (4.0.3)
       rails-dom-testing (~> 1.0)
       railties (>= 4.2.0)
@@ -299,8 +307,8 @@ GEM
       activesupport (>= 3.0)
       i18n
       polyamorous (~> 1.1)
-    responders (1.0.0)
-      railties (>= 3.2, < 5)
+    responders (2.0.2)
+      railties (>= 4.2.0.alpha, < 5)
     route_translator (4.0.0)
       actionpack (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
@@ -403,6 +411,7 @@ DEPENDENCIES
   grape-active_model_serializers
   grape-swagger-rails
   hashie_rails
+  inherited_resources!
   jquery-rails
   meta_request
   mini_magick
@@ -418,6 +427,7 @@ DEPENDENCIES
   rails (= 4.2.0)
   rails_12factor
   rails_config
+  responders (~> 2.0)
   route_translator
   rspec-rails
   rubocop

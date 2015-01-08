@@ -39,6 +39,7 @@ gem 'unicorn'
 # gem 'debugger', group: [:development, :test]
 
 gem "activeadmin", github: "gregbell/active_admin" # Until it's 1.0.0
+gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
 gem "devise"
 
 group :development do
@@ -97,4 +98,4 @@ gem "geocoder"
 gem "rails_config"
 
 #Support of respond_to and respond_with for Rails 4.2
-#gem 'responders', '~> 2.0'
+gem 'responders', '~> 2.0'
