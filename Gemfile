@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.1'
+gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
 gem 'pg'
 # Use SCSS for stylesheets
@@ -39,6 +39,7 @@ gem 'unicorn'
 # gem 'debugger', group: [:development, :test]
 
 gem "activeadmin", github: "gregbell/active_admin" # Until it's 1.0.0
+gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
 gem "devise"
 
 group :development do
@@ -62,6 +63,7 @@ group :development, :test do
   gem "rubocop"
   gem "shoulda-matchers"
   gem "spring-commands-rspec"
+  gem 'web-console', '~> 2.0'
 end
 
 gem "active_model_serializers"
@@ -94,3 +96,6 @@ gem "geocoder"
 
 #Config files
 gem "rails_config"
+
+#Support of respond_to and respond_with for Rails 4.2
+gem 'responders', '~> 2.0'
