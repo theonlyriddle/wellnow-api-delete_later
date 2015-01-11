@@ -59,7 +59,7 @@ class Doctor < ActiveRecord::Base
   end
 
   def avatar_mini_url
-    self.avatar.mini.url
+    "http://localhost:3000" + self.avatar.mini.url
   end
 
   def background_cropped_url

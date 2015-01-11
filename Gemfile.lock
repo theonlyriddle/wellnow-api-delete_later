@@ -167,7 +167,7 @@ GEM
     globalize-versioning (0.1.0.alpha.1)
       globalize (>= 3, < 5)
       paper_trail (~> 3.0.0)
-    grape (0.10.1)
+    grape (0.9.0)
       activesupport
       builder
       hashie (>= 2.1.0)
@@ -413,7 +413,7 @@ DEPENDENCIES
   geocoder
   globalize!
   globalize-versioning
-  grape
+  grape (~> 0.9.0)
   grape-active_model_serializers
   grape-swagger-rails
   hashie_rails

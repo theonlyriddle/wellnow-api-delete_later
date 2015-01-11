@@ -67,7 +67,7 @@ group :development, :test do
 end
 
 gem "active_model_serializers"
-gem "grape"
+gem "grape", '~> 0.9.0'
 gem "grape-active_model_serializers"
 gem "grape-swagger-rails"
 gem "rack-cors", require: "rack/cors"
