@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/gregbell/active_admin.git
-  revision: 7aef260921d418d904d2dba9b1a97eed893e9019
+  revision: 9fac1106ca013c4cd76ee6b231ec5dd1fcfd0790
   specs:
     activeadmin (1.0.0.pre)
       arbre (~> 1.0, >= 1.0.2)
@@ -29,9 +29,9 @@ GIT
 
 GIT
   remote: git://github.com/rbatllet/activeadmin-translate.git
-  revision: 0fd19eab5a1e43a322cdb34df05501a05e610b70
+  revision: 1c4c691ab4b6e38de419f50e9a5879451052515f
   specs:
-    activeadmin-translate (0.2.3)
+    activeadmin-translate (0.2.4)
       activeadmin
       globalize
       railties
@@ -44,6 +44,14 @@ GIT
     globalize (4.0.2)
       activemodel (>= 4.2.0, < 4.3)
       activerecord (>= 4.2.0, < 4.3)
+
+GIT
+  remote: https://github.com/jrhe/grape-active_model_serializers.git
+  revision: f13d0085062d064b9362b587cd70832aeb7cca34
+  specs:
+    grape-active_model_serializers (1.3.1)
+      active_model_serializers (>= 0.9.0)
+      grape
 
 GEM
   remote: https://rubygems.org/
@@ -86,7 +94,7 @@ GEM
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
     addressable (2.3.6)
-    arbre (1.0.2)
+    arbre (1.0.3)
       activesupport (>= 3.0.0)
     arel (6.0.0)
     ast (2.0.0)
@@ -98,13 +106,13 @@ GEM
       thread_safe (~> 0.3, >= 0.3.1)
     batch_translations (0.1.3)
     bcrypt (3.1.9)
-    better_errors (2.1.0)
+    better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bourbon (3.2.3)
+    bourbon (3.2.4)
       sass (~> 3.2)
       thor
     builder (3.2.2)
@@ -158,7 +166,7 @@ GEM
       railties (>= 3.0.0)
     faker (1.4.3)
       i18n (~> 0.5)
-    formtastic (3.1.2)
+    formtastic (3.1.3)
       actionpack (>= 3.2.13)
     formtastic_i18n (0.1.1)
     geocoder (1.2.6)
@@ -167,7 +175,7 @@ GEM
     globalize-versioning (0.1.0.alpha.1)
       globalize (>= 3, < 5)
       paper_trail (~> 3.0.0)
-    grape (0.9.0)
+    grape (0.10.1)
       activesupport
       builder
       hashie (>= 2.1.0)
@@ -177,9 +185,6 @@ GEM
       rack-accept
       rack-mount
       virtus (>= 1.0.0)
-    grape-active_model_serializers (1.3.1)
-      active_model_serializers (>= 0.9.0)
-      grape (~> 0.3)
     grape-entity (0.4.4)
       activesupport
       multi_json (>= 1.3.2)
@@ -206,11 +211,11 @@ GEM
       thor (>= 0.14, < 2.0)
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
-    json (1.8.1)
-    kaminari (0.16.1)
+    json (1.8.2)
+    kaminari (0.16.2)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
-    kgio (2.9.2)
+    kgio (2.9.3)
     kramdown (1.5.0)
     launchy (2.4.3)
       addressable (~> 2.3)
@@ -224,9 +229,9 @@ GEM
       railties (>= 3.0.0, < 5.0.0)
     method_source (0.8.2)
     mime-types (2.4.3)
-    mini_magick (4.0.1)
+    mini_magick (4.0.2)
     mini_portile (0.6.2)
-    minitest (5.5.0)
+    minitest (5.5.1)
     multi_json (1.10.1)
     multi_xml (0.5.5)
     nokogiri (1.6.5)
@@ -235,9 +240,8 @@ GEM
     paper_trail (3.0.6)
       activerecord (>= 3.0, < 5.0)
       activesupport (>= 3.0, < 5.0)
-    parser (2.2.0.1)
+    parser (2.2.0.2)
       ast (>= 1.1, < 3.0)
-      slop (~> 3.4, >= 3.4.5)
     pg (0.18.1)
     poltergeist (1.5.1)
       capybara (~> 2.1)
@@ -271,7 +275,7 @@ GEM
     rack-cors (0.3.1)
     rack-mount (0.8.3)
       rack (>= 1.0.0)
-    rack-test (0.6.2)
+    rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
       actionmailer (= 4.2.0)
@@ -307,7 +311,7 @@ GEM
     rainbow (2.0.0)
     raindrops (0.13.0)
     rake (10.4.2)
-    ransack (1.5.1)
+    ransack (1.6.2)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
       activesupport (>= 3.0)
@@ -369,7 +373,7 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.6.1)
+    uglifier (2.7.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     unicorn (4.8.3)
@@ -413,8 +417,8 @@ DEPENDENCIES
   geocoder
   globalize!
   globalize-versioning
-  grape (~> 0.9.0)
-  grape-active_model_serializers
+  grape
+  grape-active_model_serializers!
   grape-swagger-rails
   hashie_rails
   inherited_resources!
