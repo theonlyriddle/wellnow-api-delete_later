@@ -10,6 +10,7 @@ module API
       mount API::V1::Searches
       mount API::V1::Availabilities
       mount API::V1::Slots
+      mount API::V1::Users
 
       # mount API::V1::AnotherResource
 
