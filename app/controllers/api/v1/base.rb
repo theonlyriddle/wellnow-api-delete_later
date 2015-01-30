@@ -11,6 +11,7 @@ module API
       mount API::V1::Availabilities
       mount API::V1::Capacities
       mount API::V1::Slots
+      mount API::V1::Sessions
       mount API::V1::Users
 
       # mount API::V1::AnotherResource
