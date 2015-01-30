@@ -4,6 +4,10 @@ class Capacity < ActiveRecord::Base
 
     before_create :set_default_length_if_empty
 
+    def name
+        self.procedure.name
+    end
+
     private
 
         def set_default_length_if_empty
