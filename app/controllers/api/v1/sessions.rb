@@ -42,7 +42,7 @@ module API
               # }
               # render json: { :user_token => user.authentication_token, :user_email => user.email, :token_type => "bearer" }, status: 201
               {
-                :user_token => user.authentication_token, :user_email => user.email, :token_type => "bearer"
+                :user_token => user.authentication_token, :user_email => user.email, :user_id => user.id, :token_type => "bearer"
               }
            end
         end
