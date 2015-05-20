@@ -11,12 +11,12 @@ module API
         desc "Authenticate user and return user object, access token"
         params do
           group :user, type: Hash do
-            requires :email, :type => String, :desc => "User email"
+            requires :user_email, :type => String, :desc => "User email"
             requires :password, :type => String, :desc => "User password"
           end
         end
         post 'sign_in' do
-           email = params[:user][:email]
+           email = params[:user][:user_email]
            password = params[:user][:password]
 
            if email.nil? or password.nil?
@@ -37,8 +37,8 @@ module API
              user.ensure_authentication_token
              user.save
               # status(201){
-              #  status: 'ok', 
-              #  token: user.authentication_token 
+              #  status: 'ok',
+              #  token: user.authentication_token
               # }
               # render json: { :user_token => user.authentication_token, :user_email => user.email, :token_type => "bearer" }, status: 201
               {

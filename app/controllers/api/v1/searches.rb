@@ -15,7 +15,7 @@ module API
             optional :nb_days, type: Integer
           end
         end
-        
+
         post "", root: :search do
           { "declared_params" => declared(params) }
 
@@ -23,7 +23,7 @@ module API
 
           #Nb of days you want to search
           nb_days = search_params[:nb_days] || Settings.search.default_nb_days
-          
+
           #Search by latitude and longitude or address
           if !search_params[:lat].nil? && !search_params[:lon].nil?
             lookup = [search_params[:lat], search_params[:lon]]
@@ -52,7 +52,7 @@ module API
           optional :radius, type: Float
           optional :nb_days, type: Integer
         end
-        
+
         get "", root: :searches, each_serializer: SearchSerializer do
           { "declared_params" => declared(params) }
 
@@ -60,7 +60,7 @@ module API
 
           #Nb of days you want to search
           nb_days = search_params[:nb_days] || Settings.search.default_nb_days
-          
+
           #Search by latitude and longitude or address
           if !search_params[:lat].nil? && !search_params[:lon].nil?
             lookup = [search_params[:lat], search_params[:lon]]
@@ -90,14 +90,12 @@ module API
 
           searches = [search]
 
-
-
         end
 
         params do
           requires :id, type: String, desc: "ID of the search"
         end
-        
+
         get ":id", root: :search, serializer: SearchSerializer do
           { "declared_params" => declared(params) }
 
@@ -105,7 +103,7 @@ module API
 
           #Nb of days you want to search
           nb_days = params[:nb_days] || Settings.search.default_nb_days
-          
+
           #Search by latitude and longitude or address
           # if !search_params[:lat].nil? && !search_params[:lon].nil?
           #   lookup = [search_params[:lat], search_params[:lon]]
