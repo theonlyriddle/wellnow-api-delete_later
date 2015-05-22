@@ -56,6 +56,7 @@ module API
             optional :capacity_id, type: Integer
             optional :description, type: String
             optional :pain, type: Integer
+            optional :booking_status_id, type: Integer
           end
         end
 
@@ -79,6 +80,16 @@ module API
           #Edit pain
           if !booking_params[:pain].nil? && !booking_params[:pain].nil?
             booking.pain = booking_params[:pain]
+          end
+
+          #Edit user
+          if !booking_params[:user_id].nil? && !booking_params[:user_id].nil?
+            booking.user = User.find(booking_params[:user_id])
+          end
+
+          #Edit booking_status_id
+          if !booking_params[:booking_status_id].nil? && !booking_params[:booking_status_id].nil?
+            booking.booking_status_id = booking_params[:booking_status_id]
           end
 
           booking.save!()
