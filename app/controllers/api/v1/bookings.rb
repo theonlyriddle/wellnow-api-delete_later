@@ -45,6 +45,47 @@ module API
           booking
 
         end
+
+        desc "Edit a booking"
+        params do
+          requires :id, type: String, desc: "Booking ID."
+          group :booking, type: Hash do
+            optional :doctor_id, type: Integer
+            optional :slot_id, type: Integer
+            optional :user_id, type: Integer
+            optional :capacity_id, type: Integer
+            optional :description, type: String
+            optional :pain, type: Integer
+          end
+        end
+
+        put ":id", root: :booking do
+          { "declared_params" => declared(params) }
+
+          booking_params = params[:booking]
+
+          booking = Booking.find(params[:id]);
+
+          #Edit capacity
+          if !booking_params[:capacity_id].nil? && !booking_params[:capacity_id].nil?
+            booking.capacity = Capacity.find(booking_params[:capacity_id])
+          end
+
+          #Edit description
+          if !booking_params[:description].nil? && !booking_params[:description].nil?
+            booking.description = booking_params[:description]
+          end
+
+          #Edit pain
+          if !booking_params[:pain].nil? && !booking_params[:pain].nil?
+            booking.pain = booking_params[:pain]
+          end
+
+          booking.save!()
+
+          booking
+
+        end
       end
     end
   end

@@ -41,9 +41,22 @@ module API
               #  token: user.authentication_token
               # }
               # render json: { :user_token => user.authentication_token, :user_email => user.email, :token_type => "bearer" }, status: 201
+              # {
+              #   :user_token => user.authentication_token, :user_email => user.email, :user_id => user.id, :token_type => "bearer"
+              # }
+
+              render json: { :token => user.authentication_token, :email => user.email, :token_type => "bearer" }, status: 201
               {
-                :user_token => user.authentication_token, :user_email => user.email, :user_id => user.id, :token_type => "bearer"
+                :token => user.authentication_token, :email => user.email, :user_id => user.id, :token_type => "bearer"
               }
+
+              # data = {
+              #   user_token: user.authentication_token,
+              #   user_email: user.email,
+              #   user_id: user.id,
+              #   token_type: "bearer"
+              # }
+              # render json: data, status: 201 and return
            end
         end
 
