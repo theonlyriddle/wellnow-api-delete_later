@@ -5,12 +5,12 @@ module API
 
       resource :capacities do
 
-        desc "Return all availabilities"
+        desc "Return all capacities"
         params do
           optional :doctor_id, type: Integer
         end
 
-        get "", root: :availabilities do
+        get "", root: :capacities do
           if !params[:doctor_id].nil?
             Capacity.where("doctor_id" => params[:doctor_id])
           else
@@ -18,12 +18,12 @@ module API
           end
         end
 
-        desc "Return an availability"
+        desc "Return a capacity"
         params do
-          requires :id, type: String, desc: "ID of the availability"
+          requires :id, type: String, desc: "ID of the capacity"
         end
-        get ":id", root: "availability", serializer: AvailabilitySerializer do
-          Availability.find(params[:id])
+        get ":id", root: "availability", serializer: CapacitySerializer do
+          Capacity.find(params[:id])
         end
       end
     end

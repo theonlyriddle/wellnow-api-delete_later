@@ -11,12 +11,12 @@ module API
         desc "Authenticate user and return user object, access token"
         params do
           group :user, type: Hash do
-            requires :user_email, :type => String, :desc => "User email"
+            requires :email, :type => String, :desc => "User email"
             requires :password, :type => String, :desc => "User password"
           end
         end
         post 'sign_in' do
-           email = params[:user][:user_email]
+           email = params[:user][:email]
            password = params[:user][:password]
 
            if email.nil? or password.nil?
