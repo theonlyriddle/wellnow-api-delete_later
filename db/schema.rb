@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150111201702) do
+ActiveRecord::Schema.define(version: 20150520192520) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,14 @@ ActiveRecord::Schema.define(version: 20150111201702) do
 
   add_index "availability_generals", ["doctor_id"], name: "index_availability_generals_on_doctor_id", using: :btree
 
+  create_table "booking_statuses", force: :cascade do |t|
+    t.string   "name"
+    t.boolean  "is_default", default: false
+    t.boolean  "is_active",  default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
+
   create_table "bookings", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "doctor_id"
@@ -79,8 +87,9 @@ ActiveRecord::Schema.define(version: 20150111201702) do
     t.integer  "capacity_id"
     t.text     "description"
     t.integer  "pain"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "booking_status_id", default: 1
   end
 
   add_index "bookings", ["capacity_id"], name: "index_bookings_on_capacity_id", using: :btree
@@ -272,6 +281,7 @@ ActiveRecord::Schema.define(version: 20150111201702) do
 
   add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
+  add_foreign_key "bookings", "booking_statuses"
   add_foreign_key "bookings", "capacities"
   add_foreign_key "bookings", "doctors"
   add_foreign_key "bookings", "slots"
