@@ -25,6 +25,13 @@ module API
             requires :password, :type => String, :desc => "User password"
             optional :firstname, type: String
             optional :lastname, type: String
+            optional :address, type: String
+            optional :address2, type: String
+            optional :zipcode, type: String
+            optional :locality, type: String
+            optional :country_id, type: Integer
+            optional :phone, type: String
+            optional :birthdate, type: String
           end
         end
         post '' do
@@ -44,8 +51,8 @@ module API
              #user.ensure_authentication_token
              #user.save
               # status(201){
-              #  status: 'ok', 
-              #  token: user.authentication_token 
+              #  status: 'ok',
+              #  token: user.authentication_token
               # }
               # render json: { :user_token => user.authentication_token, :user_email => user.email, :token_type => "bearer" }, status: 201
               # {
@@ -56,7 +63,14 @@ module API
                 :email => email,
                 :password => password,
                 :firstname => params[:user][:firstname],
-                :lastname => params[:user][:lastname]
+                :lastname => params[:user][:lastname],
+                :address => params[:user][:address],
+                :address2 => params[:user][:address2],
+                :zipcode => params[:user][:zipcode],
+                :locality => params[:user][:locality],
+                :country_id => params[:user][:country_id],
+                :phone => params[:user][:phone],
+                :birthdate => params[:user][:birthdate],
               )
 
               {user: {email: email, password: password, id: u.id}}
