@@ -68,7 +68,7 @@ module API
                 :address2 => params[:user][:address2],
                 :zipcode => params[:user][:zipcode],
                 :locality => params[:user][:locality],
-                #:country => Country.find(params[:user][:country_id]),
+                :country => Country.find(params[:user][:country_id]),
                 :phone => params[:user][:phone],
                 :birthdate => params[:user][:birthdate],
               )
