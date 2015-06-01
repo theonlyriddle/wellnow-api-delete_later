@@ -39,13 +39,13 @@ module API
           password = params[:user][:password]
 
            if email.nil? or password.nil?
-             error!({:error_code => 404, :error_message => "Invalid email or password."}, 401)
+             error!({:error_code => 401, :error_message => "Invalid email or password."}, 401)
              return
            end
 
            user = User.find_by(email: email.downcase)
            if !user.nil?
-              error!({:error_code => 404, :error_message => "Existing user!"}, 401)
+              error!({:error_code => 401, :error_message => "Existing user!"}, 401)
               return
            else
              #user.ensure_authentication_token
@@ -75,6 +75,45 @@ module API
 
               {user: {email: email, password: password, id: u.id}}
            end
+        end
+
+        desc "Edit a user"
+        params do
+          requires :id, type: String, desc: "User ID."
+          group :user, type: Hash do
+            requires :email, :type => String, :desc => "User email"
+            requires :password, :type => String, :desc => "User password"
+            optional :firstname, type: String
+            optional :lastname, type: String
+            optional :address, type: String
+            optional :address2, type: String
+            optional :zipcode, type: String
+            optional :locality, type: String
+            optional :country_id, type: Integer
+            optional :phone, type: String
+            optional :birthdate, type: String
+          end
+        end
+
+        put ":id", root: :user do
+          { "declared_params" => declared(params) }
+
+          u = User.find(permitted_params[:id])
+          u.update!(
+            :email => params[:user][:email],
+            :firstname => params[:user][:firstname],
+            :lastname => params[:user][:lastname],
+            :address => params[:user][:address],
+            :address2 => params[:user][:address2],
+            :zipcode => params[:user][:zipcode],
+            :locality => params[:user][:locality],
+            :country => Country.find(params[:user][:country_id]),
+            :phone => params[:user][:phone],
+            :birthdate => params[:user][:birthdate],
+          )
+
+          u
+
         end
       end
     end
