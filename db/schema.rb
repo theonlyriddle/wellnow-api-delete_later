@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150520192520) do
+ActiveRecord::Schema.define(version: 20150604090033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(version: 20150520192520) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "booking_status_id", default: 1
+    t.integer  "event_id"
   end
 
   add_index "bookings", ["capacity_id"], name: "index_bookings_on_capacity_id", using: :btree
@@ -284,6 +285,7 @@ ActiveRecord::Schema.define(version: 20150520192520) do
   add_foreign_key "bookings", "booking_statuses"
   add_foreign_key "bookings", "capacities"
   add_foreign_key "bookings", "doctors"
+  add_foreign_key "bookings", "events"
   add_foreign_key "bookings", "slots"
   add_foreign_key "bookings", "users"
 end

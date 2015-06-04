@@ -6,6 +6,8 @@ class Doctor < ActiveRecord::Base
   has_many :availability_generals, :dependent => :delete_all
   has_many :capacities, :dependent => :delete_all
   has_many :procedures, through: :capacities
+  has_many :bookings
+  has_many :events
 
   validates :firstname, :lastname, :address, :zipcode, :locality, :country_id, :email, :phone, presence: true
 
@@ -22,8 +24,8 @@ class Doctor < ActiveRecord::Base
 
   has_paper_trail
 
-  scope :available_at, ->(day, time) { 
-    joins(:availability_generals).where("day = ?", day) 
+  scope :available_at, ->(day, time) {
+    joins(:availability_generals).where("day = ?", day)
   }
 
   def full_name
