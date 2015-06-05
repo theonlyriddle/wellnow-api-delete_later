@@ -6,8 +6,15 @@ module API
       resource :bookings do
 
         desc "Return all bookings"
+        params do
+          optional :user_id, type: Integer
+        end
         get "", root: :bookings do
-          Booking.all
+          if !params[:user_id].nil?
+            Booking.where("user_id" => params[:user_id]).order(id: :desc)
+          else
+            Booking.all
+          end
         end
 
         desc "Return a booking"
