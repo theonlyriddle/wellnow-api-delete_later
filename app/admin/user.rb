@@ -22,6 +22,7 @@ ActiveAdmin.register User do
     column :firstname
     column :lastname
     column :email
+    column :country
     column :current_sign_in_at
     column :sign_in_count
     column :created_at
@@ -31,6 +32,7 @@ ActiveAdmin.register User do
   filter :firstname
   filter :lastname
   filter :email
+  filter :country
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at

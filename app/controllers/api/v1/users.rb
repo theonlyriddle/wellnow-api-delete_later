@@ -39,13 +39,13 @@ module API
           password = params[:user][:password]
 
            if email.nil? or password.nil?
-             error!({:error_code => 401, :error_message => "Invalid email or password."}, 401)
+             error!({:error_code => 400, :error_message => "Invalid email or password."}, 401)
              return
            end
 
            user = User.find_by(email: email.downcase)
            if !user.nil?
-              error!({:error_code => 401, :error_message => "Existing user!"}, 401)
+              error!({:error_code => 400, :error_message => I18n.t('users.errors.existing_user')}, 401)
               return
            else
              #user.ensure_authentication_token

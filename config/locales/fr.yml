@@ -19,8 +19,8 @@
 # To learn more, please read the Rails Internationalization guide
 # available at http://guides.rubyonrails.org/i18n.html.
 
-en:
-  hello: "Hello world"
+fr:
+  hello: "Bonjour, vous"
   users:
     errors:
-      existing_user: "This email address is already used by another user. Please select a new one."
+      existing_user: "Cette adresse e-mail est déjà utilisée. Veuillez en choisir une autre."
