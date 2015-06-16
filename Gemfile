@@ -80,8 +80,8 @@ gem 'paper_trail', '~> 3.0.3'
 gem 'rails_12factor', group: :production
 
 #i18n
-gem 'globalize', :git => 'https://github.com/globalize/globalize.git', :branch => 'rails-4-2-upgrade'
-gem 'globalize-versioning'
+gem 'globalize', '~> 5.0.0'
+gem 'globalize-versioning', '~> 0.1.0'
 gem 'batch_translations'
 gem 'route_translator'
 gem 'activeadmin-translate', github: 'rbatllet/activeadmin-translate'

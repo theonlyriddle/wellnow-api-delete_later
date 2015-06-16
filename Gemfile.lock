@@ -37,15 +37,6 @@ GIT
       railties
 
 GIT
-  remote: https://github.com/globalize/globalize.git
-  revision: 649df7d11b2781162cdaa1a4f0282deeeb13584e
-  branch: rails-4-2-upgrade
-  specs:
-    globalize (4.0.2)
-      activemodel (>= 4.2.0, < 4.3)
-      activerecord (>= 4.2.0, < 4.3)
-
-GIT
   remote: https://github.com/jrhe/grape-active_model_serializers.git
   revision: f13d0085062d064b9362b587cd70832aeb7cca34
   specs:
@@ -172,8 +163,13 @@ GEM
     geocoder (1.2.6)
     globalid (0.3.0)
       activesupport (>= 4.1.0)
-    globalize-versioning (0.1.0.alpha.1)
-      globalize (>= 3, < 5)
+    globalize (5.0.1)
+      activemodel (>= 4.2.0, < 4.3)
+      activerecord (>= 4.2.0, < 4.3)
+    globalize-versioning (0.1.0)
+      activemodel (>= 3.2.0, < 5)
+      activerecord (>= 3.2.0, < 5)
+      globalize (>= 3.0.4, < 6)
       paper_trail (~> 3.0.0)
     grape (0.10.1)
       activesupport
@@ -415,8 +411,8 @@ DEPENDENCIES
   factory_girl_rails
   faker
   geocoder
-  globalize!
-  globalize-versioning
+  globalize (~> 5.0.0)
+  globalize-versioning (~> 0.1.0)
   grape
   grape-active_model_serializers!
   grape-swagger-rails
