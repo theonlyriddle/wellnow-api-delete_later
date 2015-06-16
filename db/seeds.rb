@@ -7,7 +7,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-sql = "TRUNCATE TABLE slots"
+sql = "TRUNCATE TABLE slots CASCADE"
 ActiveRecord::Base.connection.execute sql
 
 #Creates slots for a year
