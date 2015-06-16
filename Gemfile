@@ -99,3 +99,5 @@ gem "rails_config"
 
 #Support of respond_to and respond_with for Rails 4.2
 gem 'responders', '~> 2.0'
+
+ruby "2.2.0"
