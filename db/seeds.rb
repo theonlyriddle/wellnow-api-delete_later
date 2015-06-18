@@ -14,7 +14,8 @@ ActiveRecord::Base.connection.execute sql
 inserts = []
 #Check if they are available
 from_date = Date.today
-to_date = Date.today + 10.years
+#to_date = Date.today + 10.years
+to_date = Date.today + 1.month
 (from_date..to_date).each { |d|
     #Loop around the hours
     for hour in 0..23
