@@ -39,7 +39,7 @@ gem 'unicorn'
 # gem 'debugger', group: [:development, :test]
 
 gem "activeadmin", github: "gregbell/active_admin" # Until it's 1.0.0
-gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
+#gem 'inherited_resources', github: 'josevalim/inherited_resources', branch: 'rails-4-2'
 gem "devise"
 
 group :development do
@@ -66,7 +66,7 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 end
 
-gem "active_model_serializers"
+gem "active_model_serializers", '0.10.0.rc2'
 gem "grape"
 gem "grape-active_model_serializers", :git => 'https://github.com/jrhe/grape-active_model_serializers.git'
 gem "grape-swagger-rails"
@@ -100,4 +100,4 @@ gem "rails_config"
 #Support of respond_to and respond_with for Rails 4.2
 gem 'responders', '~> 2.0'
 
-ruby "2.2.0"
+ruby "2.2.1"
