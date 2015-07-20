@@ -66,12 +66,18 @@ group :development, :test do
   gem 'web-console', '~> 2.0'
 end
 
-gem "active_model_serializers", '0.10.0.rc2'
-gem "grape"
-gem "grape-active_model_serializers", :git => 'https://github.com/jrhe/grape-active_model_serializers.git'
-gem "grape-swagger-rails"
+#gem "active_model_serializers", '0.10.0.rc2'
+#gem "active_model_serializers", git: 'git@github.com:rails-api/active_model_serializers.git'
+#gem "grape"
+#gem "grape-active_model_serializers", :git => 'https://github.com/jrhe/grape-active_model_serializers.git'
+#gem "grape-swagger-rails"
 gem "rack-cors", require: "rack/cors"
 gem "hashie_rails"
+
+#JSON API
+gem 'json'
+gem 'json-jwt'
+gem 'jsonapi-resources'
 
 # Model history
 gem 'paper_trail', '~> 3.0.3'

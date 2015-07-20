@@ -1,13 +1,21 @@
 Rails.application.routes.draw do
 
+  namespace :api do
+    namespace :v1 do
+      jsonapi_resources :countries
+      jsonapi_resources :categories
+      jsonapi_resources :doctors
+    end
+  end
+
   devise_for :users, controllers: { sessions: 'sessions' }
   devise_for :admin_users, ActiveAdmin::Devise.config
   ActiveAdmin.routes(self)
 
   root to: "welcome#index"
 
-  mount API::Base, at: "/"
-  mount GrapeSwaggerRails::Engine, at: "/documentation"
+  #mount API::Base, at: "/"
+  #mount GrapeSwaggerRails::Engine, at: "/documentation"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

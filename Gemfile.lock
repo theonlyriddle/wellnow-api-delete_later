@@ -25,14 +25,6 @@ GIT
       globalize
       railties
 
-GIT
-  remote: https://github.com/jrhe/grape-active_model_serializers.git
-  revision: f13d0085062d064b9362b587cd70832aeb7cca34
-  specs:
-    grape-active_model_serializers (1.3.1)
-      active_model_serializers (>= 0.9.0)
-      grape
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -55,8 +47,6 @@ GEM
       erubis (~> 2.7.0)
       rails-dom-testing (~> 1.0, >= 1.0.5)
       rails-html-sanitizer (~> 1.0, >= 1.0.1)
-    active_model_serializers (0.10.0.rc2)
-      activemodel (>= 4.0)
     activejob (4.2.0)
       activesupport (= 4.2.0)
       globalid (>= 0.3.0)
@@ -80,16 +70,13 @@ GEM
     ast (2.0.0)
     astrolabe (1.3.0)
       parser (>= 2.2.0.pre.3, < 3.0)
-    axiom-types (0.1.1)
-      descendants_tracker (~> 0.0.4)
-      ice_nine (~> 0.11.0)
-      thread_safe (~> 0.3, >= 0.3.1)
     batch_translations (0.1.3)
     bcrypt (3.1.9)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
+    bindata (2.1.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
     bourbon (3.2.4)
@@ -114,8 +101,6 @@ GEM
       mime-types (>= 1.16)
     cliver (0.3.2)
     coderay (1.1.0)
-    coercible (1.0.0)
-      descendants_tracker (~> 0.0.1)
     coffee-rails (4.1.0)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -126,8 +111,6 @@ GEM
     colored (1.2)
     database_cleaner (1.4.0)
     debug_inspector (0.0.2)
-    descendants_tracker (0.0.4)
-      thread_safe (~> 0.3, >= 0.3.1)
     devise (3.4.1)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -136,7 +119,6 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     diff-lcs (1.2.5)
-    equalizer (0.0.9)
     erubis (2.7.0)
     execjs (2.2.2)
     factory_girl (4.5.0)
@@ -160,26 +142,6 @@ GEM
       activerecord (>= 3.2.0, < 5)
       globalize (>= 3.0.4, < 6)
       paper_trail (~> 3.0.0)
-    grape (0.10.1)
-      activesupport
-      builder
-      hashie (>= 2.1.0)
-      multi_json (>= 1.3.2)
-      multi_xml (>= 0.5.2)
-      rack (>= 1.3.0)
-      rack-accept
-      rack-mount
-      virtus (>= 1.0.0)
-    grape-entity (0.4.4)
-      activesupport
-      multi_json (>= 1.3.2)
-    grape-swagger (0.7.2)
-      grape (>= 0.2.0)
-      grape-entity (>= 0.3.0)
-      kramdown (>= 1.3.1)
-    grape-swagger-rails (0.0.10)
-      grape-swagger (~> 0.7.2)
-      railties (>= 3.2.12)
     has_scope (0.6.0)
       actionpack (>= 3.2, < 5)
       activesupport (>= 3.2, < 5)
@@ -189,7 +151,6 @@ GEM
       rails (~> 4.0)
     hike (1.2.3)
     i18n (0.7.0)
-    ice_nine (0.11.1)
     inherited_resources (1.6.0)
       actionpack (>= 3.2, < 5)
       has_scope (~> 0.6.0.rc)
@@ -202,11 +163,18 @@ GEM
     jquery-ui-rails (5.0.3)
       railties (>= 3.2.16)
     json (1.8.3)
+    json-jwt (1.0.3)
+      activesupport
+      bindata
+      multi_json (>= 1.3)
+      securecompare
+      url_safe_base64
+    jsonapi-resources (0.5.0)
+      rails (>= 4.0)
     kaminari (0.16.2)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kgio (2.9.3)
-    kramdown (1.5.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     loofah (2.0.1)
@@ -223,7 +191,6 @@ GEM
     mini_portile (0.6.2)
     minitest (5.7.0)
     multi_json (1.10.1)
-    multi_xml (0.5.5)
     nokogiri (1.6.5)
       mini_portile (~> 0.6.0)
     orm_adapter (0.5.0)
@@ -258,13 +225,9 @@ GEM
     quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.6.0)
-    rack-accept (0.4.5)
-      rack (>= 0.4)
     rack-contrib (1.2.0)
       rack (>= 0.9.1)
     rack-cors (0.3.1)
-    rack-mount (0.8.3)
-      rack (>= 1.0.0)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.0)
@@ -341,6 +304,7 @@ GEM
       sass (~> 3.2.2)
       sprockets (~> 2.8, < 3.0)
       sprockets-rails (~> 2.0)
+    securecompare (1.0.0)
     shoulda-matchers (2.7.0)
       activesupport (>= 3.0.0)
     slop (3.6.0)
@@ -370,11 +334,7 @@ GEM
       kgio (~> 2.6)
       rack
       raindrops (~> 0.7)
-    virtus (1.0.4)
-      axiom-types (~> 0.1)
-      coercible (~> 1.0)
-      descendants_tracker (~> 0.0, >= 0.0.3)
-      equalizer (~> 0.0, >= 0.0.9)
+    url_safe_base64 (0.2.2)
     warden (1.2.3)
       rack (>= 1.0)
     web-console (2.0.0)
@@ -392,7 +352,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  active_model_serializers (= 0.10.0.rc2)
   activeadmin!
   activeadmin-translate!
   batch_translations
@@ -407,11 +366,11 @@ DEPENDENCIES
   geocoder
   globalize (~> 5.0.0)
   globalize-versioning (~> 0.1.0)
-  grape
-  grape-active_model_serializers!
-  grape-swagger-rails
   hashie_rails
   jquery-rails
+  json
+  json-jwt
+  jsonapi-resources
   meta_request
   mini_magick
   paper_trail (~> 3.0.3)

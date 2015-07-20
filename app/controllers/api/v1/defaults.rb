@@ -10,6 +10,7 @@ module API
         default_format :json
         format :json
         formatter :json, Grape::Formatter::ActiveModelSerializers
+        #formatter :json, ActiveModelSerializers
 
         helpers do
           def permitted_params
