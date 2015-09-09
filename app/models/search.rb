@@ -1,5 +1,7 @@
 class Search < ActiveRecord::Base
     belongs_to :category
+    has_many :distances
+    has_many :doctors, through: :distances
 
     def doctors=(docs)
         @doctors = docs

@@ -8,6 +8,8 @@ class Doctor < ActiveRecord::Base
   has_many :procedures, through: :capacities
   has_many :bookings
   has_many :events
+  has_many :distances
+  has_many :searches, through: :distances
 
   validates :firstname, :lastname, :address, :zipcode, :locality, :country_id, :email, :phone, presence: true
 

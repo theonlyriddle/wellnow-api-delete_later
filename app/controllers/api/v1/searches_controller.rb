@@ -12,12 +12,19 @@ module Api
       # end
 
       def show
-        search = Search.last
+        search = Search.find(params[:id])
 
         lookup = [search.lat, search.lon]
         radius = search.radius || Settings.search.default_radius
 
         search.doctors = Doctor.joins(:categories).where("category_id = ?", search.category_id).near(lookup, radius)
+
+        distances = []
+        search.doctors.each do |doc|
+          puts doc.distance
+          distances << Distance.new(:calculated_distance => doc.distance, :search_id => search.id, :doctor_id => doc.id)
+        end
+        Distance.import distances
 
         #Nb of days you want to search
         nb_days = params[:nb_days] || Settings.search.default_nb_days
@@ -32,35 +39,44 @@ module Api
           offset_days += 1
         end until !search.slots.blank? || offset_days > 7
 
-        search_json = JSONAPI::ResourceSerializer.new(SearchResource, include: ['doctors', 'slots', 'availabilities', 'doctors.availabilities']).serialize_to_hash(SearchResource.new(search))
+        search_json = JSONAPI::ResourceSerializer.new(SearchResource, include: ['doctors', 'slots', 'distances']).serialize_to_hash(SearchResource.new(search))
         render json: search_json
       end
 
       def create
-        puts params[:search][:cat]
 
-        # #Nb of days you want to search
-        # nb_days = search_params[:nb_days] || Settings.search.default_nb_days
-        #
-        # #Search by latitude and longitude or address
-        # if !search_params[:lat].nil? && !search_params[:lon].nil?
-        #   lookup = [search_params[:lat], search_params[:lon]]
-        # else
-        #   lookup = search_params[:addr]
-        # end
-        #
-        # #Radius
-        # radius = search_params[:radius] || Settings.search.default_radius
-        #
-        # search = Search.create!(:category_id => search_params['cat'], :lat => search_params['lat'], :lon => search_params['lon'], :radius => radius)
+        sparams = params[:data][:attributes]
+        category = params[:data][:relationships][:category][:data][:id]
+
+
+
+        #Nb of days you want to search
+        nb_days = sparams[:nb_days] || Settings.search.default_nb_days
+
+        #Search by latitude and longitude or address
+        if !sparams[:lat].nil? && !sparams[:lon].nil?
+          lookup = [sparams[:lat], sparams[:lon]]
+        else
+          lookup = sparams[:addr]
+        end
+
+        #Radius
+        radius = sparams[:radius] || Settings.search.default_radius
+
+        search = Search.create!(:category_id => category, :lat => sparams['lat'], :lon => sparams['lon'], :radius => radius)
         #
         # search.doctors = []
         # search.slots = []
-        #
-        # search
+
+        search_json = JSONAPI::ResourceSerializer.new(SearchResource).serialize_to_hash(SearchResource.new(search))
+        render json: search_json
       end
 
       private
+
+      def search_params
+        params.permit(:data, :category, :lat, :lon, :nb_days, :radius, :address)
+      end
 
       # def search_params
       #   params.require(:search).permit(:email, :password)

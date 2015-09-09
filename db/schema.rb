@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150604090033) do
+ActiveRecord::Schema.define(version: 20150815205048) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -152,6 +152,17 @@ ActiveRecord::Schema.define(version: 20150604090033) do
     t.string   "default_time_zone", limit: 255
   end
 
+  create_table "distances", force: :cascade do |t|
+    t.float    "calculated_distance"
+    t.integer  "search_id"
+    t.integer  "doctor_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  add_index "distances", ["doctor_id"], name: "index_distances_on_doctor_id", using: :btree
+  add_index "distances", ["search_id"], name: "index_distances_on_search_id", using: :btree
+
   create_table "doctors", force: :cascade do |t|
     t.string   "firstname",  limit: 255
     t.string   "lastname",   limit: 255
@@ -288,4 +299,6 @@ ActiveRecord::Schema.define(version: 20150604090033) do
   add_foreign_key "bookings", "events"
   add_foreign_key "bookings", "slots"
   add_foreign_key "bookings", "users"
+  add_foreign_key "distances", "doctors"
+  add_foreign_key "distances", "searches"
 end

@@ -5,9 +5,12 @@ Rails.application.routes.draw do
       jsonapi_resources :countries
       jsonapi_resources :categories
       jsonapi_resources :doctors
-      jsonapi_resources :searches
+      jsonapi_resources :searches do
+        jsonapi_relationships
+      end
       jsonapi_resources :slots
       jsonapi_resources :availabilities
+      jsonapi_resources :distances
     end
   end
 

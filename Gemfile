@@ -72,7 +72,7 @@ end
 #gem "grape-active_model_serializers", :git => 'https://github.com/jrhe/grape-active_model_serializers.git'
 #gem "grape-swagger-rails"
 gem "rack-cors", require: "rack/cors"
-gem "hashie_rails"
+gem "hashie-forbidden_attributes"
 
 #JSON API
 gem 'json'
@@ -101,9 +101,12 @@ gem 'carrierwave'
 gem "geocoder"
 
 #Config files
-gem "rails_config"
+gem "config"
 
 #Support of respond_to and respond_with for Rails 4.2
 gem 'responders', '~> 2.0'
+
+#ActiveRecord mass insert
+gem 'activerecord-import'
 
 ruby "2.2.1"
