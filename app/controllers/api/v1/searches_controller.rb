@@ -11,37 +11,37 @@ module Api
       #   render json: searches_json
       # end
 
-      def show
-        search = Search.find(params[:id])
-
-        lookup = [search.lat, search.lon]
-        radius = search.radius || Settings.search.default_radius
-
-        search.doctors = Doctor.joins(:categories).where("category_id = ?", search.category_id).near(lookup, radius)
-
-        distances = []
-        search.doctors.each do |doc|
-          puts doc.distance
-          distances << Distance.new(:calculated_distance => doc.distance, :search_id => search.id, :doctor_id => doc.id)
-        end
-        Distance.import distances
-
-        #Nb of days you want to search
-        nb_days = params[:nb_days] || Settings.search.default_nb_days
-
-        #Paging
-        offset_days = 0
-        time_start = Time.zone.now + 1.hours
-
-        #Find available slots in a week
-        begin
-          search.slots = Slot.includes(:availabilities, :doctors).joins(:availabilities, :doctors).where("start > (?) AND start <= (?)", (time_start + offset_days.days), Date.today + offset_days.days + nb_days.days).order(:start).merge(search.doctors)
-          offset_days += 1
-        end until !search.slots.blank? || offset_days > 7
-
-        search_json = JSONAPI::ResourceSerializer.new(SearchResource, include: ['doctors', 'slots', 'distances']).serialize_to_hash(SearchResource.new(search))
-        render json: search_json
-      end
+      # def show
+      #   search = Search.find(params[:id])
+      #
+      #   lookup = [search.lat, search.lon]
+      #   radius = search.radius || Settings.search.default_radius
+      #
+      #   search.doctors = Doctor.joins(:categories).where("category_id = ?", search.category_id).near(lookup, radius)
+      #
+      #   distances = []
+      #   search.doctors.each do |doc|
+      #     puts doc.distance
+      #     distances << Distance.new(:calculated_distance => doc.distance, :search_id => search.id, :doctor_id => doc.id)
+      #   end
+      #   Distance.import distances
+      #
+      #   #Nb of days you want to search
+      #   nb_days = params[:nb_days] || Settings.search.default_nb_days
+      #
+      #   #Paging
+      #   offset_days = 0
+      #   time_start = Time.zone.now + 1.hours
+      #
+      #   #Find available slots in a week
+      #   begin
+      #     search.slots = Slot.includes(:availabilities, :doctors).joins(:availabilities, :doctors).where("start > (?) AND start <= (?)", (time_start + offset_days.days), Date.today + offset_days.days + nb_days.days).order(:start).merge(search.doctors)
+      #     offset_days += 1
+      #   end until !search.slots.blank? || offset_days > 7
+      #
+      #   search_json = JSONAPI::ResourceSerializer.new(SearchResource, include: ['doctors', 'slots', 'distances']).serialize_to_hash(SearchResource.new(search))
+      #   render json: search_json
+      # end
 
       def create
 
